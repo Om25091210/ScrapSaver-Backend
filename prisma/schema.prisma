@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  email         String   @unique @map("email")
+  name          String   @map("name")
+  uid           String   @map("uid")
+  phoneNo       Int      @map("phoneNo")
+  walletBalance Int      @map("walletBalance")
+  totalEarning  Int      @map("totalEarning")
+  createdAt     DateTime @default(now()) @map("createdAt") @db.Timestamp()
+  updatedAt     DateTime @map("updatedAt") @db.Timestamp()
+}
+
+model Donations {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique @map("email")
+  address   String   @map("address")
+  phone     String   @map("phone_no")
+  date      String   @map("date")
+  time      String   @map("time")
+  imageurl  String   @map("imageurl")
+  status    String   @map("status")
+  createdAt DateTime @default(now()) @map("createdAt") @db.Timestamp()
+  updatedAt DateTime @map("updatedAt") @db.Timestamp()
+}
