@@ -63,6 +63,8 @@ router.get("/rates", donation_1.default.getRates);
 //router for Donations
 router.post("/create-donation", donation_1.default.createDonation);
 router.get("/donations/:email", donation_1.default.getDonations);
+//updateDonation
+router.put("/update/donation", donation_1.default.updateDonation);
 router.get("/donations/:email/:status", donation_1.default.getDonationsByStatus);
 router.delete("/delete-donation", donation_1.default.deleteDonation);
 exports.default = router;
