@@ -30,6 +30,8 @@ model Donations {
   date      String   @map("date")
   time      String   @map("time")
   imageurl  String   @map("imageurl")
+  donationType      String   @map("donationType")
+  wallet    String   @map("wallet")
   status    String   @map("status")
   createdAt DateTime @default(now()) @map("createdAt") @db.Timestamp()
   updatedAt DateTime @map("updatedAt") @db.Timestamp()
