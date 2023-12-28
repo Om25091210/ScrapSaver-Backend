@@ -54,10 +54,13 @@ router.post('/image-upload', upload.single("filename"), async (req, res, next) =
   }
 });
 
+//Router for getting rates.
+router.get("/rates",donation_controllers.getRates);
 
-//router for Books
+//router for Donations
 router.post("/create-donation",donation_controllers.createDonation);
 router.get("/donations/:email",donation_controllers.getDonations);
 router.get("/donations/:email/:status",donation_controllers.getDonationsByStatus);
+router.delete("/delete-donation",donation_controllers.deleteDonation);
 
 export default router

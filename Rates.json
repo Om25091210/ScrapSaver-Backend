@@ -1,0 +1,202 @@
+{
+    "scrapCategories": [
+      {
+        "category": "Paper",
+        "items": [
+          {
+            "name": "Newspaper",
+            "rate": "RS 16/KG"
+          },
+          {
+            "name": "Office Paper (A3/A4)",
+            "rate": "RS 16/KG"
+          },
+          {
+            "name": "Copies/Books",
+            "rate": "RS 14/KG"
+          }
+        ]
+      },
+      {
+        "category": "Cardboard",
+        "items": [
+          {
+            "name": "Cardboard",
+            "rate": "RS 7/KG"
+          }
+        ]
+      },
+      {
+        "category": "Plastic",
+        "items": [
+          {
+            "name": "Plastic",
+            "rate": "RS 10/KG"
+          }
+        ]
+      },
+      {
+        "category": "Metal",
+        "items": [
+          {
+            "name": "Iron",
+            "rate": "RS 27/KG"
+          },
+          {
+            "name": "Steel",
+            "rate": "RS 37/KG"
+          },
+          {
+            "name": "Aluminium",
+            "rate": "RS 105/KG"
+          },
+          {
+            "name": "Brass",
+            "rate": "RS 305/KG"
+          },
+          {
+            "name": "Copper",
+            "rate": "RS 425/KG"
+          }
+        ]
+      },
+      {
+        "category": "Large Appliances",
+        "items": [
+          {
+            "name": "Split AC 1.5 TON (Copper Coil)",
+            "rate": "RS 4200/PIECE"
+          },
+          {
+            "name": "Window AC 1.5 TON (Copper Coil)",
+            "rate": "RS 4000/PIECE"
+          },
+          {
+            "name": "AC 1 TON (Copper Coil)",
+            "rate": "RS 3000/PIECE"
+          },
+          {
+            "name": "AC 2 TON (Copper Coil)",
+            "rate": "RS 4500/PIECE"
+          },
+          {
+            "name": "Front Load Fully Automatic Washing Machine",
+            "rate": "RS 800/PIECE"
+          },
+          {
+            "name": "Top Load Fully Automatic Washing Machine",
+            "rate": "RS 600/PIECE"
+          },
+          {
+            "name": "Semi Automatic Washing Machine (Double Drum)",
+            "rate": "RS 600/PIECE"
+          },
+          {
+            "name": "Geyser",
+            "rate": "RS 20/KG"
+          },
+          {
+            "name": "Single Door Fridge",
+            "rate": "RS 1000/PIECE"
+          },
+          {
+            "name": "Double Door Fridge",
+            "rate": "RS 1200/PIECE"
+          },
+          {
+            "name": "Iron Cooler",
+            "rate": "RS 30/KG"
+          }
+        ]
+      },
+      {
+        "category": "Small Appliances",
+        "items": [
+          {
+            "name": "Heavy E-Waste (Content: Metal > Plastic)",
+            "rate": "RS 30/KG"
+          },
+          {
+            "name": "Light E-Waste (Content: Plastic > Metal)",
+            "rate": "RS 15/KG"
+          },
+          {
+            "name": "Printer/Scanner/Fax Machine",
+            "rate": "RS 15/KG"
+          },
+          {
+            "name": "CRT TV",
+            "rate": "RS 150/PIECE"
+          },
+          {
+            "name": "Ceiling Fan",
+            "rate": "RS 35/KG"
+          }
+        ]
+      },
+      {
+        "category": "Motors",
+        "items": [
+          {
+            "name": "Copper Wiring",
+            "rate": "RS 35/KG"
+          },
+          {
+            "name": "Microwave",
+            "rate": "RS 200/PIECE"
+          },
+          {
+            "name": "UPS",
+            "rate": "RS 180/PIECE"
+          },
+          {
+            "name": "Inverter/Stabilizer (Copper Coil)",
+            "rate": "RS 42/KG"
+          },
+          {
+            "name": "Battery (Used with Inverters)",
+            "rate": "RS 72/KG"
+          }
+        ]
+      },
+      {
+        "category": "Mobiles & Computers",
+        "items": [
+          {
+            "name": "Scrap Tablet",
+            "rate": "RS 40/PIECE"
+          },
+          {
+            "name": "Scrap Laptop",
+            "rate": "RS 300/PIECE"
+          },
+          {
+            "name": "CRT Monitor",
+            "rate": "RS 150/PIECE"
+          },
+          {
+            "name": "LCD Monitor",
+            "rate": "RS 20/KG"
+          },
+          {
+            "name": "Computer CPU",
+            "rate": "RS 200/PIECE"
+          }
+        ]
+      },
+      {
+        "category": "Others",
+        "items": [
+          {
+            "name": "Bike",
+            "rate": "RS 2100/PIECE"
+          },
+          {
+            "name": "Car",
+            "rate": "RS 20000/PIECE"
+          }
+        ]
+      }
+    ]
+  }
+  
