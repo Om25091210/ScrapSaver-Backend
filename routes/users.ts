@@ -19,11 +19,9 @@ const firebaseConfig = {
   
 firebsae.initializeApp(firebaseConfig);
   
-// const storage = getStorage();
-  
-//const upload = multer({ storage: multer.memoryStorage() });
-  
 const router:Router = Router();
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 //routers for Users
 router.get("/users",user_controllers.getUsers);
@@ -32,27 +30,28 @@ router.put("/update/:email",user_controllers.updateUser);
 router.post("/new_user",user_controllers.createUser);
 router.delete("/delete_user/:email",user_controllers.deleteUser);
 
-// router.post('/image-upload', upload.single("filename"), async (req, res, next) => {
-//   try {
-//       if (!req.file) {
-//           throw new Error('No file uploaded');
-//       }
+router.post('/image-upload', upload.single("filename"), async (req, res, next) => {
+  try {
+      const storage = getStorage();
+      if (!req.file) {
+          throw new Error('No file uploaded');
+      }
 
-//       const storageRef = ref(storage, `files/${req.file?.originalname}`);
-//       const snapshot = await uploadBytes(storageRef, req.file.buffer);
+      const storageRef = ref(storage, `files/${req.file?.originalname}`);
+      const snapshot = await uploadBytes(storageRef, req.file.buffer);
 
-//       const downloadURL = await getDownloadURL(snapshot.ref);
-//       console.log('File available at', downloadURL);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      console.log('File available at', downloadURL);
 
-//       res.json({
-//           message: 'File uploaded successfully',
-//           fileUrl: downloadURL
-//       });
-//   } catch (error) {
-//       console.error("Error uploading file:", error);
-//       res.status(500).json({ error: 'Error uploading file' });
-//   }
-// });
+      res.json({
+          message: 'File uploaded successfully',
+          fileUrl: downloadURL
+      });
+  } catch (error) {
+      console.error("Error uploading file:", error);
+      res.status(500).json({ error: 'Error uploading file' });
+  }
+});
 
 //Router for getting rates.
 router.get("/rates",donation_controllers.getRates);
