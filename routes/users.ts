@@ -2,9 +2,9 @@ import {Express, Request, Response, NextFunction, Router} from 'express';
 import user_controllers from "../controllers/users";
 import donation_controllers from "../controllers/donation";
 // Import the middleware and function from the imgUpload controller
-// const multer = require("multer");
-// const firebsae = require("firebase/app");
-// import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
+const multer = require("multer");
+const firebsae = require("firebase/app");
+import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
 
 
 // const firebaseConfig = {
