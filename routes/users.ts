@@ -19,7 +19,7 @@ const firebaseConfig = {
   
 firebsae.initializeApp(firebaseConfig);
   
-const storage = getStorage();
+// const storage = getStorage();
   
 //const upload = multer({ storage: multer.memoryStorage() });
   

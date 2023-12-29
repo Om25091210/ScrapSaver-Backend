@@ -9,7 +9,6 @@ const donation_1 = __importDefault(require("../controllers/donation"));
 // Import the middleware and function from the imgUpload controller
 const multer = require("multer");
 const firebsae = require("firebase/app");
-const storage_1 = require("firebase/storage");
 const firebaseConfig = {
     apiKey: "AIzaSyBzQ-bQBLysok0nfHR0ZQJ82ftruYyGpoc",
     authDomain: "scrapsaver-f21f5.firebaseapp.com",
@@ -20,7 +19,7 @@ const firebaseConfig = {
     measurementId: "G-02YMLSBGLX"
 };
 firebsae.initializeApp(firebaseConfig);
-const storage = (0, storage_1.getStorage)();
+// const storage = getStorage();
 //const upload = multer({ storage: multer.memoryStorage() });
 const router = (0, express_1.Router)();
 //routers for Users
