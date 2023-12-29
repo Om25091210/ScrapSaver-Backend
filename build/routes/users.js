@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -16,21 +7,21 @@ const express_1 = require("express");
 const users_1 = __importDefault(require("../controllers/users"));
 const donation_1 = __importDefault(require("../controllers/donation"));
 // Import the middleware and function from the imgUpload controller
-const multer = require("multer");
-const firebsae = require("firebase/app");
-const storage_1 = require("firebase/storage");
-const firebaseConfig = {
-    apiKey: "AIzaSyBzQ-bQBLysok0nfHR0ZQJ82ftruYyGpoc",
-    authDomain: "scrapsaver-f21f5.firebaseapp.com",
-    projectId: "scrapsaver-f21f5",
-    storageBucket: "scrapsaver-f21f5.appspot.com",
-    messagingSenderId: "1062344693975",
-    appId: "1:1062344693975:web:1de04e29f491bb816ab892",
-    measurementId: "G-02YMLSBGLX"
-};
-firebsae.initializeApp(firebaseConfig);
-const storage = (0, storage_1.getStorage)();
-const upload = multer({ storage: multer.memoryStorage() });
+// const multer = require("multer");
+// const firebsae = require("firebase/app");
+// import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBzQ-bQBLysok0nfHR0ZQJ82ftruYyGpoc",
+//     authDomain: "scrapsaver-f21f5.firebaseapp.com",
+//     projectId: "scrapsaver-f21f5",
+//     storageBucket: "scrapsaver-f21f5.appspot.com",
+//     messagingSenderId: "1062344693975",
+//     appId: "1:1062344693975:web:1de04e29f491bb816ab892",
+//     measurementId: "G-02YMLSBGLX"
+//   };
+// firebsae.initializeApp(firebaseConfig);
+// const storage = getStorage();
+// const upload = multer({ storage: multer.memoryStorage() });
 const router = (0, express_1.Router)();
 //routers for Users
 router.get("/users", users_1.default.getUsers);
@@ -38,26 +29,24 @@ router.get("/user/:email", users_1.default.getUser);
 router.put("/update/:email", users_1.default.updateUser);
 router.post("/new_user", users_1.default.createUser);
 router.delete("/delete_user/:email", users_1.default.deleteUser);
-router.post('/image-upload', upload.single("filename"), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    try {
-        if (!req.file) {
-            throw new Error('No file uploaded');
-        }
-        const storageRef = (0, storage_1.ref)(storage, `files/${(_a = req.file) === null || _a === void 0 ? void 0 : _a.originalname}`);
-        const snapshot = yield (0, storage_1.uploadBytes)(storageRef, req.file.buffer);
-        const downloadURL = yield (0, storage_1.getDownloadURL)(snapshot.ref);
-        console.log('File available at', downloadURL);
-        res.json({
-            message: 'File uploaded successfully',
-            fileUrl: downloadURL
-        });
-    }
-    catch (error) {
-        console.error("Error uploading file:", error);
-        res.status(500).json({ error: 'Error uploading file' });
-    }
-}));
+// router.post('/image-upload', upload.single("filename"), async (req, res, next) => {
+//   try {
+//       if (!req.file) {
+//           throw new Error('No file uploaded');
+//       }
+//       const storageRef = ref(storage, `files/${req.file?.originalname}`);
+//       const snapshot = await uploadBytes(storageRef, req.file.buffer);
+//       const downloadURL = await getDownloadURL(snapshot.ref);
+//       console.log('File available at', downloadURL);
+//       res.json({
+//           message: 'File uploaded successfully',
+//           fileUrl: downloadURL
+//       });
+//   } catch (error) {
+//       console.error("Error uploading file:", error);
+//       res.status(500).json({ error: 'Error uploading file' });
+//   }
+// });
 //Router for getting rates.
 router.get("/rates", donation_1.default.getRates);
 //router for Donations
