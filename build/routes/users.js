@@ -7,9 +7,8 @@ const express_1 = require("express");
 const users_1 = __importDefault(require("../controllers/users"));
 const donation_1 = __importDefault(require("../controllers/donation"));
 // Import the middleware and function from the imgUpload controller
-// const multer = require("multer");
-// const firebsae = require("firebase/app");
-// import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
+const multer = require("multer");
+const firebsae = require("firebase/app");
 // const firebaseConfig = {
 //     apiKey: "AIzaSyBzQ-bQBLysok0nfHR0ZQJ82ftruYyGpoc",
 //     authDomain: "scrapsaver-f21f5.firebaseapp.com",
