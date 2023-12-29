@@ -21,7 +21,7 @@ firebsae.initializeApp(firebaseConfig);
   
 const storage = getStorage();
   
-const upload = multer({ storage: multer.memoryStorage() });
+//const upload = multer({ storage: multer.memoryStorage() });
   
 const router:Router = Router();
 

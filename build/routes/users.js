@@ -21,7 +21,7 @@ const firebaseConfig = {
 };
 firebsae.initializeApp(firebaseConfig);
 const storage = (0, storage_1.getStorage)();
-const upload = multer({ storage: multer.memoryStorage() });
+//const upload = multer({ storage: multer.memoryStorage() });
 const router = (0, express_1.Router)();
 //routers for Users
 router.get("/users", users_1.default.getUsers);
