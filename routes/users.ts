@@ -7,21 +7,21 @@ const firebsae = require("firebase/app");
 import { getStorage, ref, uploadBytes,getDownloadURL  } from "firebase/storage";
 
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBzQ-bQBLysok0nfHR0ZQJ82ftruYyGpoc",
-//     authDomain: "scrapsaver-f21f5.firebaseapp.com",
-//     projectId: "scrapsaver-f21f5",
-//     storageBucket: "scrapsaver-f21f5.appspot.com",
-//     messagingSenderId: "1062344693975",
-//     appId: "1:1062344693975:web:1de04e29f491bb816ab892",
-//     measurementId: "G-02YMLSBGLX"
-//   };
+const firebaseConfig = {
+    apiKey: "AIzaSyBzQ-bQBLysok0nfHR0ZQJ82ftruYyGpoc",
+    authDomain: "scrapsaver-f21f5.firebaseapp.com",
+    projectId: "scrapsaver-f21f5",
+    storageBucket: "scrapsaver-f21f5.appspot.com",
+    messagingSenderId: "1062344693975",
+    appId: "1:1062344693975:web:1de04e29f491bb816ab892",
+    measurementId: "G-02YMLSBGLX"
+  };
   
-// firebsae.initializeApp(firebaseConfig);
+firebsae.initializeApp(firebaseConfig);
   
-// const storage = getStorage();
+const storage = getStorage();
   
-// const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage() });
   
 const router:Router = Router();
 
