@@ -47,9 +47,61 @@ const getDonationsByStatus = async (req: Request, res: Response, next: NextFunct
   }
 };
 
+const updateDonation = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    //Getting all donation data to update.
+    const{ email, createdAt, type, address, phoneNo, time, date, imageurl} = req.body;
+    console.log(req.body);
+    const dataToUpdate: any = {};
+
+    if (type !== undefined) {
+      dataToUpdate.type = type;
+    }
+
+    if (address !== undefined) {
+      dataToUpdate.address = address;
+    }
+
+    if (phoneNo !== undefined) {
+      dataToUpdate.phoneNo = phoneNo;
+    }
+
+    if (time !== undefined) {
+      dataToUpdate.time = time;
+    }
+
+    if (imageurl !== undefined) {
+      dataToUpdate.imageurl = imageurl;
+    }
+
+    if (date !== undefined) {
+      dataToUpdate.date = date;
+    }
+    
+    // Perform the update operation with the data object
+    const result = await prisma.donations.update({
+      where: {
+        email: email,
+        createdAt: createdAt,
+      },
+      data: dataToUpdate,
+    });
+
+    // Send the response with a 200 status code and the user data
+    return res.status(200).json({
+      response: result,
+    });
+  } catch (error) {
+    // If there's an error, handle it by sending a 500 status code and an error message
+    return res.status(500).json({
+      error: "Failed to get data.",
+    });
+  }
+};
+
 const createDonation= async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { imageurl, address, phone, date, time, email, status } = req.body;
+    const { imageurl, address, phone, date, time, email, status, donationType, wallet } = req.body;
 
     const result = await prisma.donations.create({
       data: {
@@ -59,6 +111,8 @@ const createDonation= async (req: Request, res: Response, next: NextFunction) =>
         date: date,
         time: time,
         imageurl: imageurl,
+        donationType: donationType,
+        wallet: wallet,
         status: status,
         updatedAt: new Date().toISOString(),
       },
@@ -128,4 +182,4 @@ const deleteDonation=async(req:Request,res:Response,next:NextFunction)=>{
 };
 
 
-export default { createDonation, getDonations, getDonationsByStatus, deleteDonation, getRates };
+export default { createDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation };

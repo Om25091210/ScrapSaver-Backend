@@ -59,6 +59,8 @@ router.get("/rates",donation_controllers.getRates);
 //router for Donations
 router.post("/create-donation",donation_controllers.createDonation);
 router.get("/donations/:email",donation_controllers.getDonations);
+//updateDonation
+router.put("/update/donation",donation_controllers.updateDonation);
 router.get("/donations/:email/:status",donation_controllers.getDonationsByStatus);
 router.delete("/delete-donation",donation_controllers.deleteDonation);
 
