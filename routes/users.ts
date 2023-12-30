@@ -19,11 +19,9 @@ const firebaseConfig = {
   
 firebsae.initializeApp(firebaseConfig);
   
-const storage = getStorage();
-  
-const upload = multer({ storage: multer.memoryStorage() });
-  
 const router:Router = Router();
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 //routers for Users
 router.get("/users",user_controllers.getUsers);
@@ -34,6 +32,7 @@ router.delete("/delete_user/:email",user_controllers.deleteUser);
 
 router.post('/image-upload', upload.single("filename"), async (req, res, next) => {
   try {
+      const storage = getStorage();
       if (!req.file) {
           throw new Error('No file uploaded');
       }

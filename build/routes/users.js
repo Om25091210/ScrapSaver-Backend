@@ -29,9 +29,8 @@ const firebaseConfig = {
     measurementId: "G-02YMLSBGLX"
 };
 firebsae.initializeApp(firebaseConfig);
-const storage = (0, storage_1.getStorage)();
-const upload = multer({ storage: multer.memoryStorage() });
 const router = (0, express_1.Router)();
+const upload = multer({ storage: multer.memoryStorage() });
 //routers for Users
 router.get("/users", users_1.default.getUsers);
 router.get("/user/:email", users_1.default.getUser);
@@ -41,6 +40,7 @@ router.delete("/delete_user/:email", users_1.default.deleteUser);
 router.post('/image-upload', upload.single("filename"), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
+        const storage = (0, storage_1.getStorage)();
         if (!req.file) {
             throw new Error('No file uploaded');
         }
