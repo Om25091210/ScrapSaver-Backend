@@ -22,17 +22,35 @@ model Users {
   updatedAt     DateTime @map("updatedAt") @db.Timestamp()
 }
 
+model Admins {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique @map("email")
+}
+
+model Pickers {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  email      String   @unique @map("email")
+  name       String   @map("name")
+  phoneNo    Int      @map("phoneNo")
+  totalPicks Int      @map("totalPicks")
+  createdAt  DateTime @default(now()) @map("createdAt") @db.Timestamp()
+  updatedAt  DateTime @map("updatedAt") @db.Timestamp()
+}
+
 model Donations {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  email     String   @unique @map("email")
-  address   String   @map("address")
-  phone     String   @map("phone_no")
-  date      String   @map("date")
-  time      String   @map("time")
-  imageurl  String   @map("imageurl")
-  donationType      String   @map("donationType")
-  wallet    String   @map("wallet")
-  status    String   @map("status")
-  createdAt DateTime @default(now()) @map("createdAt") @db.Timestamp()
-  updatedAt DateTime @map("updatedAt") @db.Timestamp()
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  email        String   @unique @map("email")
+  address      String   @map("address")
+  phone        String   @map("phone_no")
+  date         String   @map("date")
+  time         String   @map("time")
+  imageurl     String   @map("imageurl")
+  donationType String   @map("donationType")
+  wallet       String   @map("wallet")
+  status       String   @map("status")
+  picker       String   @default("") @map("picker")
+  amount       String   @default("-1") @map("amount")
+  code         String   @default("-1") @map("Code")
+  createdAt    DateTime @default(now()) @map("createdAt") @db.Timestamp()
+  updatedAt    DateTime @map("updatedAt") @db.Timestamp()
 }

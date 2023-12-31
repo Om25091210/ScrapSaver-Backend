@@ -28,20 +28,21 @@ const getDonations = async (req: Request, res: Response, next: NextFunction) => 
 };
 
 const getDonationsByStatus = async (req: Request, res: Response, next: NextFunction) => {
+  //Getting all books list.
+  const{ email, status } = req.params;
+  console.log(status);
+  let result = await prisma.donations.findMany({
+    where:{
+      email: email,
+      status:status
+    }
+  });
+  // Send the response with a 200 status code and the user data
+  return res.status(200).json({
+    response: result,
+  });
   try {
-    //Getting all books list.
-    const{ email, status } = req.params;
-    console.log(status);
-    let result = await prisma.donations.findMany({
-      where:{
-        email: email,
-        status:status
-      }
-    });
-    // Send the response with a 200 status code and the user data
-    return res.status(200).json({
-      response: result,
-    });
+    
   } catch (error) {
     // If there's an error, handle it by sending a 500 status code and an error message
     return res.status(500).json({

@@ -1,6 +1,8 @@
 import {Express, Request, Response, NextFunction, Router} from 'express';
 import user_controllers from "../controllers/users";
 import donation_controllers from "../controllers/donation";
+import OTP from "../controllers/OTP";
+import Payment from "../controllers/Payment";
 // Import the middleware and function from the imgUpload controller
 const multer = require("multer");
 const firebsae = require("firebase/app");
@@ -55,6 +57,15 @@ router.post('/image-upload', upload.single("filename"), async (req, res, next) =
 
 //Router for getting rates.
 router.get("/rates",donation_controllers.getRates);
+
+//Router for generating OTP.
+router.post("/generate-otp",OTP.saveOTPToDatabase);
+//Route for Verifying OTP.
+router.get("/verify-otp",OTP.VerifyOTP);
+//Route for addition of amount to db.
+router.post("/add-amount",Payment.saveAmountToDatabase);
+router.get("/get-amount",Payment.getAmount);
+router.post("/verify-amount",Payment.VerifyAmountStatus);
 
 //router for Donations
 router.post("/create-donation",donation_controllers.createDonation);

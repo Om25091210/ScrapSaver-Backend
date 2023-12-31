@@ -1,4 +1,4 @@
-import { Express, Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import prisma from "../db";
 
 // Get all users from the database
