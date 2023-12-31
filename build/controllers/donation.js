@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../db"));
 const fs = require('fs');
 const path = require('path');
+// const RatesData = require('../Rates')
+const Rates_1 = require("../Rates");
 const getDonations = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //Getting all books list.
@@ -132,10 +134,12 @@ const createDonation = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 });
 const getRates = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const filePath = path.join(__dirname, '../Rates.json');
-        const jsonData = fs.readFileSync(filePath, 'utf8');
-        // Parse the JSON data
-        const ratesData = JSON.parse(jsonData);
+        console.log(Rates_1.rates);
+        // const filePath = path.join(__dirname, '../Rates.json');
+        // const jsonData = fs.readFileSync(filePath, 'utf8');
+        // // Parse the JSON data
+        // const ratesData = JSON.parse(jsonData);
+        const ratesData = Rates_1.rates;
         // Extracting categories and items separately for better structure
         const categories = ratesData.scrapCategories.map((category) => {
             return {
