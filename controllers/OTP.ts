@@ -58,6 +58,17 @@ const VerifyOTP = async (req: Request, res: Response) => {
         const savedOTP = donation.code; // Fetch the saved OTP from the database
   
         if (savedOTP === code) {
+          
+          const updateDonationStatus = await prisma.donations.update({
+            where: {
+              email: email,
+              createdAt: createdAt,
+            },
+            data:{
+              status:"Transaction Pending"
+            }
+          });
+
           return res.status(200).json({
             message: "OTP verification successful",
           });

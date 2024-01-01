@@ -60,8 +60,8 @@ router.get("/rates",donation_controllers.getRates);
 
 //Router for generating OTP.
 router.post("/generate-otp",OTP.saveOTPToDatabase);
-//Route for Verifying OTP.
 router.post("/verify-otp",OTP.VerifyOTP);
+
 //Route for addition of amount to db.
 router.post("/add-amount",Payment.saveAmountToDatabase);
 router.get("/get-amount",Payment.getAmount);
@@ -74,7 +74,7 @@ router.get("/donation/:email/:createdAt",donation_controllers.getDonation);
 router.post("/confirm-pickup",donation_controllers.setResponded);
 
 //updateDonation
-router.put("/update/donation",donation_controllers.updateDonation);
+router.put("/update-donation",donation_controllers.updateDonation);
 router.get("/donations/:email/:status",donation_controllers.getDonationsByStatus);
 router.delete("/delete-donation",donation_controllers.deleteDonation);
 
