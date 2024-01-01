@@ -64,7 +64,30 @@ const getDonationsByStatus = (req, res, next) => __awaiter(void 0, void 0, void 
     try {
         //Getting all books list.
         const { email, status } = req.params;
-        console.log(status);
+        const isAdmin = yield db_1.default.admins.findFirst({ where: { email: email } });
+        if (isAdmin) {
+            let result;
+            if (status === 'Pending') {
+                result = yield db_1.default.donations.findMany({
+                    where: {
+                        NOT: {
+                            status: 'Completed'
+                        }
+                    }
+                });
+            }
+            else {
+                result = yield db_1.default.donations.findMany({
+                    where: {
+                        status: 'Completed'
+                    }
+                });
+            }
+            // Send the response with a 200 status code and the user data
+            return res.status(200).json({
+                response: result,
+            });
+        }
         let result = yield db_1.default.donations.findMany({
             where: {
                 email: email,
