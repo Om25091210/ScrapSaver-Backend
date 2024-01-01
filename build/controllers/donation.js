@@ -38,6 +38,28 @@ const getDonations = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         });
     }
 });
+const getDonation = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        //Getting all books list.
+        const { email, createdAt } = req.params;
+        let result = yield db_1.default.donations.findFirst({
+            where: {
+                email: email,
+                createdAt: createdAt
+            }
+        });
+        // Send the response with a 200 status code and the user data
+        return res.status(200).json({
+            response: result,
+        });
+    }
+    catch (error) {
+        // If there's an error, handle it by sending a 500 status code and an error message
+        return res.status(500).json({
+            error: "Failed to get data.",
+        });
+    }
+});
 const getDonationsByStatus = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     //Getting all books list.
     const { email, status } = req.params;
@@ -184,4 +206,4 @@ const deleteDonation = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         });
     }
 });
-exports.default = { createDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation };
+exports.default = { createDonation, getDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation };

@@ -27,6 +27,28 @@ const getDonations = async (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
+const getDonation = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    //Getting all books list.
+    const{ email, createdAt } = req.params;
+    let result = await prisma.donations.findFirst({
+      where:{
+        email: email,
+        createdAt : createdAt
+      }
+    });
+    // Send the response with a 200 status code and the user data
+    return res.status(200).json({
+      response: result,
+    });
+  } catch (error) {
+    // If there's an error, handle it by sending a 500 status code and an error message
+    return res.status(500).json({
+      error: "Failed to get data.",
+    });
+  }
+};
+
 const getDonationsByStatus = async (req: Request, res: Response, next: NextFunction) => {
   //Getting all books list.
   const{ email, status } = req.params;
@@ -188,4 +210,4 @@ const deleteDonation=async(req:Request,res:Response,next:NextFunction)=>{
 };
 
 
-export default { createDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation };
+export default { createDonation,getDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation };
