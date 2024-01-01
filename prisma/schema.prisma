@@ -16,6 +16,7 @@ model Users {
   name          String   @map("name")
   uid           String   @map("uid")
   phoneNo       Int      @map("phoneNo")
+  role          String   @default("user") @map("role")
   walletBalance Int      @map("walletBalance")
   totalEarning  Int      @map("totalEarning")
   createdAt     DateTime @default(now()) @map("createdAt") @db.Timestamp()
@@ -31,8 +32,8 @@ model Pickers {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   email      String   @unique @map("email")
   name       String   @map("name")
-  phoneNo    Int      @map("phoneNo")
-  totalPicks Int      @map("totalPicks")
+  phoneNo    String   @default("0") @map("phoneNo")
+  totalPicks String   @map("totalPicks")
   createdAt  DateTime @default(now()) @map("createdAt") @db.Timestamp()
   updatedAt  DateTime @map("updatedAt") @db.Timestamp()
 }

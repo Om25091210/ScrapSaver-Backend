@@ -79,12 +79,10 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // Create a new user in the database
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+const createUser = async (req: Request, res: Response) => {
   try {
-    // Extract the user data from the request body
-    const { email, name, uid, phoneNo, walletBalance, totalEarning } = req.body;
+    const { email, name, uid, phoneNo = '0', walletBalance = '0', totalEarning = '0' } = req.body;
 
-    // Check if the user already exists by email or uid
     const existingUser = await prisma.users.findFirst({
       where: {
         OR: [
@@ -94,42 +92,64 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
       },
     });
 
-    // If the user already exists, log in the user (or perform login logic)
     if (existingUser) {
-      // Perform your login logic here
-      // For example, navigate to the "Home" screen
+      const isAdmin = await prisma.admins.findFirst({ where: { email: email } });
+      const isPicker = await prisma.pickers.findFirst({ where: { email: email } });
+
+      let role = "user";
+
+      if (isAdmin) {
+        role = "admin";
+      } else if (isPicker) {
+        role = "picker";
+      }
       return res.status(200).json({
         message: "User already exists. Logged in.",
         user: existingUser,
+        role: role,
       });
     }
 
-    // Create a new user in the database using Prisma's create method
-    const newUser = await prisma.users.create({
-      data: {
-        email,
-        name,
-        uid,
-        phoneNo: parseInt(phoneNo) || 0,
-        walletBalance: parseInt(walletBalance) || 0,
-        totalEarning: parseInt(totalEarning) || 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
+    const isAdmin = await prisma.admins.findFirst({ where: { email: email } });
+    const isPicker = await prisma.pickers.findFirst({ where: { email: email } });
+
+    let role = "user";
+
+    if (isAdmin) {
+      role = "admin";
+    } else if (isPicker) {
+      role = "picker";
+    }
+
+    const newUser = await prisma.$transaction(async (prisma) => {
+      return prisma.users.create({
+        data: {
+          email,
+          name,
+          uid,
+          phoneNo: parseInt(phoneNo),
+          walletBalance: parseInt(walletBalance),
+          totalEarning: parseInt(totalEarning),
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          role: role,
+        },
+      });
     });
 
-    // Send the response with a 201 status code and the newly created user data
     return res.status(201).json({
       message: "User created successfully.",
+      role: role,
       user: newUser,
     });
   } catch (error) {
-    // If there's an error, handle it by sending a 500 status code and an error message
+    console.error("Error creating user:", error);
     return res.status(500).json({
       error: "Failed to create user.",
     });
   }
 };
+
 
 // Delete a user from the database
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
