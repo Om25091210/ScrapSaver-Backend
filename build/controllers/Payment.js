@@ -18,8 +18,13 @@ const saveAmountToDatabase = (req, res) => __awaiter(void 0, void 0, void 0, fun
         //Getting the request body.
         const { email, createdAt, amount } = req.body; // Adjust this according to your request body structure
         const dataToUpdate = {};
-        if (amount !== undefined) {
+        if (amount !== -1) {
             dataToUpdate.amount = amount;
+        }
+        else {
+            return res.status(500).json({
+                error: "Failed to save Amount in database.",
+            });
         }
         dataToUpdate.status = "Transaction Pending";
         // Save the generated OTP ('code') to the database for the specific user/email
@@ -32,20 +37,20 @@ const saveAmountToDatabase = (req, res) => __awaiter(void 0, void 0, void 0, fun
         });
         if (updatedDonation) {
             return res.status(200).json({
-                message: "OTP saved successfully",
+                message: "Amount saved successfully",
                 data: updatedDonation,
             });
         }
         else {
             return res.status(500).json({
-                error: "Failed to save OTP in database.",
+                error: "Failed to save Amount in database.",
             });
         }
     }
     catch (error) {
-        console.error("Error saving OTP to the database:", error);
+        console.error("Error saving Amount to the database:", error);
         return res.status(500).json({
-            error: "Failed to save OTP.",
+            error: "Failed to save Amount.",
         });
     }
 });
