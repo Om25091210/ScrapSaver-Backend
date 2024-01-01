@@ -15,11 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../db"));
 const fs = require('fs');
 const path = require('path');
-// const RatesData = require('../Rates')
 const Rates_1 = require("../Rates");
 const getDonations = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        //Getting all books list.
         const { email } = req.body;
         let result = yield db_1.default.donations.findMany({
             where: {

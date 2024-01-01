@@ -2,13 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import prisma from "../db";
 const fs = require('fs');
 const path = require('path');
-// const RatesData = require('../Rates')
 import { rates } from '../Rates';
 
 
 const getDonations = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    //Getting all books list.
     const{ email } = req.body;
     let result = await prisma.donations.findMany({
       where:{
