@@ -18,7 +18,7 @@ const saveOTPToDatabase = async (req: Request, res: Response) => {
         createdAt:createdAt,
       },
       data: {
-        code: otp.toString(), // Saving the OTP as a string in the 'code' field
+        code : otp.toString() as string, // Saving the OTP as a string in the 'code' field
       },
     });
 

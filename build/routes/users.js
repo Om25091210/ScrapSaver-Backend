@@ -65,7 +65,7 @@ router.get("/rates", donation_1.default.getRates);
 //Router for generating OTP.
 router.post("/generate-otp", OTP_1.default.saveOTPToDatabase);
 //Route for Verifying OTP.
-router.get("/verify-otp", OTP_1.default.VerifyOTP);
+router.post("/verify-otp", OTP_1.default.VerifyOTP);
 //Route for addition of amount to db.
 router.post("/add-amount", Payment_1.default.saveAmountToDatabase);
 router.get("/get-amount", Payment_1.default.getAmount);
