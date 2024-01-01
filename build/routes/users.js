@@ -74,6 +74,7 @@ router.post("/verify-amount", Payment_1.default.VerifyAmountStatus);
 router.post("/create-donation", donation_1.default.createDonation);
 router.get("/donations/:email", donation_1.default.getDonations);
 router.get("/donation/:email/:createdAt", donation_1.default.getDonation);
+router.post("/confirm-pickup", donation_1.default.setResponded);
 //updateDonation
 router.put("/update/donation", donation_1.default.updateDonation);
 router.get("/donations/:email/:status", donation_1.default.getDonationsByStatus);

@@ -50,21 +50,20 @@ const getDonation = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getDonationsByStatus = async (req: Request, res: Response, next: NextFunction) => {
-  //Getting all books list.
-  const{ email, status } = req.params;
-  console.log(status);
-  let result = await prisma.donations.findMany({
-    where:{
-      email: email,
-      status:status
-    }
-  });
-  // Send the response with a 200 status code and the user data
-  return res.status(200).json({
-    response: result,
-  });
   try {
-    
+    //Getting all books list.
+    const{ email, status } = req.params;
+    console.log(status);
+    let result = await prisma.donations.findMany({
+      where:{
+        email: email,
+        status:status
+      }
+    });
+    // Send the response with a 200 status code and the user data
+    return res.status(200).json({
+      response: result,
+    });
   } catch (error) {
     // If there's an error, handle it by sending a 500 status code and an error message
     return res.status(500).json({
@@ -153,6 +152,41 @@ const createDonation= async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
+const setResponded = async (req: Request, res: Response) => {
+  try {
+    // Assuming 'email' is the identifier for a user in the donations table
+    const {email, createdAt} = req.body; // Adjust this according to your request body structure
+
+    // Save the generated OTP ('code') to the database for the specific user/email
+    const updatedDonation = await prisma.donations.update({
+      where: {
+        email: email,
+        createdAt:createdAt,
+      },
+      data: {
+        status : "Responded", // Saving the OTP as a string in the 'code' field
+      },
+    });
+    console.log(updateDonation.length);
+    if (updatedDonation) {
+        return res.status(200).json({
+          message: "Status changed successfully",
+          data: updateDonation,
+        });
+      } 
+    else {
+        return res.status(500).json({
+          error: "Failed to changed status in database.",
+        });
+    }
+  } catch (error) {
+    console.error("Error change status to the database:", error);
+    return res.status(500).json({
+      error: "Failed to change status.",
+    });
+  }
+};
+
 const getRates= async (req: Request, res: Response, next: NextFunction) => {
   try {
     console.log(rates);
@@ -210,4 +244,4 @@ const deleteDonation=async(req:Request,res:Response,next:NextFunction)=>{
 };
 
 
-export default { createDonation,getDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation };
+export default { createDonation,getDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation, setResponded };

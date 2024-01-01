@@ -61,20 +61,20 @@ const getDonation = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 const getDonationsByStatus = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    //Getting all books list.
-    const { email, status } = req.params;
-    console.log(status);
-    let result = yield db_1.default.donations.findMany({
-        where: {
-            email: email,
-            status: status
-        }
-    });
-    // Send the response with a 200 status code and the user data
-    return res.status(200).json({
-        response: result,
-    });
     try {
+        //Getting all books list.
+        const { email, status } = req.params;
+        console.log(status);
+        let result = yield db_1.default.donations.findMany({
+            where: {
+                email: email,
+                status: status
+            }
+        });
+        // Send the response with a 200 status code and the user data
+        return res.status(200).json({
+            response: result,
+        });
     }
     catch (error) {
         // If there's an error, handle it by sending a 500 status code and an error message
@@ -154,6 +154,40 @@ const createDonation = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         });
     }
 });
+const setResponded = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Assuming 'email' is the identifier for a user in the donations table
+        const { email, createdAt } = req.body; // Adjust this according to your request body structure
+        // Save the generated OTP ('code') to the database for the specific user/email
+        const updatedDonation = yield db_1.default.donations.update({
+            where: {
+                email: email,
+                createdAt: createdAt,
+            },
+            data: {
+                status: "Responded", // Saving the OTP as a string in the 'code' field
+            },
+        });
+        console.log(updateDonation.length);
+        if (updatedDonation) {
+            return res.status(200).json({
+                message: "Status changed successfully",
+                data: updateDonation,
+            });
+        }
+        else {
+            return res.status(500).json({
+                error: "Failed to changed status in database.",
+            });
+        }
+    }
+    catch (error) {
+        console.error("Error change status to the database:", error);
+        return res.status(500).json({
+            error: "Failed to change status.",
+        });
+    }
+});
 const getRates = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log(Rates_1.rates);
@@ -206,4 +240,4 @@ const deleteDonation = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         });
     }
 });
-exports.default = { createDonation, getDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation };
+exports.default = { createDonation, getDonation, getDonations, getDonationsByStatus, deleteDonation, getRates, updateDonation, setResponded };
