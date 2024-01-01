@@ -50,7 +50,7 @@ model Donations {
   wallet       String   @map("wallet")
   status       String   @map("status")
   picker       String   @default("") @map("picker")
-  amount       Int      @default(-1) @map("amount")
+  amount       String      @default("-1") @map("amount")
   code         String   @default("-1") @map("code")
   createdAt    DateTime @default(now()) @map("createdAt") @db.Timestamp()
   updatedAt    DateTime @map("updatedAt") @db.Timestamp()
