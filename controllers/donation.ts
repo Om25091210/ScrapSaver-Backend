@@ -73,13 +73,22 @@ const getDonationsByStatus = async (req: Request, res: Response, next: NextFunct
         response: result,
       });  
     }
-    
-    let result = await prisma.donations.findMany({
-      where:{
-        email: email,
-        status:status
-      }
-    });
+    let result;
+    if (status === 'Pending') {
+      result = await prisma.donations.findMany({
+        where: {
+          NOT: {
+            status: 'Completed'
+          }
+        }
+      });
+    } else {
+      result = await prisma.donations.findMany({
+        where: {
+            status: 'Completed'
+        }
+      });
+    }
     // Send the response with a 200 status code and the user data
     return res.status(200).json({
       response: result,
