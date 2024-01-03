@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, response } from "express";
 import prisma from "../db";
 import { rates } from '../Rates';
 
@@ -73,26 +73,32 @@ const getDonationsByStatus = async (req: Request, res: Response, next: NextFunct
         response: result,
       });  
     }
-    let result;
-    if (status === 'Pending') {
-      result = await prisma.donations.findMany({
-        where: {
-          NOT: {
-            status: 'Completed'
+    else{
+      let result;
+      console.log(status);
+      if (status === 'Pending') {
+        result = await prisma.donations.findMany({
+          where: {
+            email:email,
+            NOT: {
+              status: 'Completed'
+            }
           }
-        }
-      });
-    } else {
-      result = await prisma.donations.findMany({
-        where: {
-            status: 'Completed'
-        }
+        });
+        console.log(response);
+      } else {
+        result = await prisma.donations.findMany({
+          where: {
+              email:email,
+              status: 'Completed'
+          }
+        });
+      }
+      // Send the response with a 200 status code and the user data
+      return res.status(200).json({
+        response: result,
       });
     }
-    // Send the response with a 200 status code and the user data
-    return res.status(200).json({
-      response: result,
-    });
   } catch (error) {
     // If there's an error, handle it by sending a 500 status code and an error message
     return res.status(500).json({

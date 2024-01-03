@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
 const db_1 = __importDefault(require("../db"));
 const Rates_1 = require("../Rates");
 const getDonations = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -84,27 +85,33 @@ const getDonationsByStatus = (req, res, next) => __awaiter(void 0, void 0, void 
                 response: result,
             });
         }
-        let result;
-        if (status === 'Pending') {
-            result = yield db_1.default.donations.findMany({
-                where: {
-                    NOT: {
+        else {
+            let result;
+            console.log(status);
+            if (status === 'Pending') {
+                result = yield db_1.default.donations.findMany({
+                    where: {
+                        email: email,
+                        NOT: {
+                            status: 'Completed'
+                        }
+                    }
+                });
+                console.log(express_1.response);
+            }
+            else {
+                result = yield db_1.default.donations.findMany({
+                    where: {
+                        email: email,
                         status: 'Completed'
                     }
-                }
+                });
+            }
+            // Send the response with a 200 status code and the user data
+            return res.status(200).json({
+                response: result,
             });
         }
-        else {
-            result = yield db_1.default.donations.findMany({
-                where: {
-                    status: 'Completed'
-                }
-            });
-        }
-        // Send the response with a 200 status code and the user data
-        return res.status(200).json({
-            response: result,
-        });
     }
     catch (error) {
         // If there's an error, handle it by sending a 500 status code and an error message
