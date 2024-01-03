@@ -65,7 +65,7 @@ const VerifyOTP = async (req: Request, res: Response) => {
               createdAt: createdAt,
             },
             data:{
-              status:"Transaction Pending"
+              status:"Verified"
             }
           });
 

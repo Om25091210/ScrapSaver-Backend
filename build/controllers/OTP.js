@@ -70,7 +70,7 @@ const VerifyOTP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                         createdAt: createdAt,
                     },
                     data: {
-                        status: "Transaction Pending"
+                        status: "Verified"
                     }
                 });
                 return res.status(200).json({
