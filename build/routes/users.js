@@ -57,7 +57,7 @@ router.post('/image-upload', upload.single("filename"), (req, res, next) => __aw
     }
     catch (error) {
         console.error("Error uploading file:", error);
-        res.status(500).json({ error: 'Error uploading file' });
+        res.status(500).send({ error: `Error uploading file with error : ${error} ` });
     }
 }));
 //Router for getting rates.

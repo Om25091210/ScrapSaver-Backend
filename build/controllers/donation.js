@@ -277,7 +277,7 @@ const deleteDonation = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     }
     catch (error) {
         return res.status(500).json({
-            response: error,
+            error: "Error in deletion of Pickup",
         });
     }
 });
