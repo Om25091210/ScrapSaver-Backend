@@ -51,7 +51,7 @@ router.post('/image-upload', upload.single("filename"), async (req, res, next) =
       });
   } catch (error) {
       console.error("Error uploading file:", error);
-      res.status(500).json({ error: `Error uploading file ${error}` });
+      res.status(500).json({ error: `Error uploading file with error : ${error} ` });
   }
 });
 
