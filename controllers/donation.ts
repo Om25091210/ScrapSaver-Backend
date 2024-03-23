@@ -281,7 +281,7 @@ const deleteDonation=async(req:Request,res:Response,next:NextFunction)=>{
       }); 
   }catch(error){
       return res.status(500).json({
-          response: error,
+          error : "Error in deletion of Pickup",
       }); 
   }
 };
